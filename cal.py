@@ -2,6 +2,9 @@ from tkinter import *
 from tkinter import ttk
 cal=Tk()
 
+entry=ttk.Entry(cal)
+entry.grid(row=0,columnspan=5,sticky=('nsew'))
+
 button_1=ttk.Button(cal,text="1")
 button_1.grid(row=2,column=0)
 
@@ -52,7 +55,7 @@ button_div=ttk.Button(cal,text="/")
 button_div.grid(row=5,column=3)
 
 button_equ=ttk.Button(cal,text="=")
-button_equ.grid(rowspan=4,column=3)
+button_equ.grid(rowspan=4,column=4)
 
 
 
