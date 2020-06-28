@@ -1,9 +1,13 @@
 from tkinter import *
 from tkinter import ttk
 cal=Tk()
-
-entry=ttk.Entry(cal)
+exp=""
+def clear():
+	global exp
+	exp=""
+entry=ttk.Entry(cal,justify="right")
 entry.grid(row=0,columnspan=5,sticky=('nsew'))
+
 
 button_1=ttk.Button(cal,text="1")
 button_1.grid(row=2,column=0)
@@ -39,7 +43,7 @@ button_0.grid(row=5,column=1)
 button_dec=ttk.Button(cal,text=".")
 button_dec.grid(row=5,column=0)
 
-button_clr=ttk.Button(cal,text="clear")
+button_clr=ttk.Button(cal,text="clear",command=clear())
 button_clr.grid(row=5,column=2)
 
 button_plus=ttk.Button(cal,text="+")
@@ -55,7 +59,10 @@ button_div=ttk.Button(cal,text="/")
 button_div.grid(row=5,column=3)
 
 button_equ=ttk.Button(cal,text="=")
-button_equ.grid(rowspan=4,column=4)
+button_equ.grid(row=6,columnspan=4,sticky=('nswe'))
+
+#button_equ=ttk.Button(cal,text="=")
+#button_equ.grid(column=4,rowspan=2,sticky=('nswe'))
 
 
 
