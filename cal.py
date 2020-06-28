@@ -1,6 +1,7 @@
 import tkinter as tk
 import  tkinter.ttk as ttk
 cal=tk.Tk()
+cal.title("My Python Calculator")
 exp=""
 text=tk.StringVar()
 
