@@ -18,6 +18,11 @@ def eql():
 	global exp
 	ttl=str(eval(exp))
 	text.set(ttl)
+def delet():
+	global exp
+	le=len(exp)
+	exp=exp[0:(le-1)]
+	text.set(exp)
 
 
 
@@ -28,6 +33,8 @@ entry.grid(row=0,columnspan=5,sticky=('nsew'))
 
 button_1=ttk.Button(cal,text="1",command=lambda:press('1'))
 button_1.grid(row=2,column=0)
+
+button_1.bind('<1>',button_1)
 
 button_2=ttk.Button(cal,text="2",command=lambda:press(2))
 button_2.grid(row=2,column=1)
@@ -56,6 +63,9 @@ button_9.grid(row=4,column=2)
 
 button_0=ttk.Button(cal,text="0",command=lambda:press('0'))
 button_0.grid(row=5,column=1)
+
+button_c=ttk.Button(cal,text="c",command=delet)
+button_c.grid(row=7,column=0)
 
 button_dec=ttk.Button(cal,text=".",command=lambda:press("."))
 button_dec.grid(row=5,column=0)
