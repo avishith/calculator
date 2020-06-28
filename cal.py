@@ -96,7 +96,7 @@ button_equ.grid(row=6,columnspan=4,sticky=('nswe'))
 
 #button_0=ttk.Button(cal,text="0'')
 #button_0.grid(row=5,column=0)
-
+#error in pulling
 
 
 
