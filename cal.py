@@ -18,6 +18,7 @@ def eql():
 	global exp
 	ttl=str(eval(exp))
 	text.set(ttl)
+#delet the last degit
 def delet():
 	global exp
 	le=len(exp)
