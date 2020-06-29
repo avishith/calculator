@@ -11,7 +11,7 @@ import  tkinter.ttk as ttk
 
 cal=tk.Tk()
 cal.title("My Python Calculator")
-cal.iconbitmap(r'Calc.ico')
+#cal.iconbitmap(r'Calc.ico')
 
 exp=""
 text=tk.StringVar()
@@ -80,6 +80,9 @@ button_0.grid(row=5,column=1)
 
 button_c=ttk.Button(cal,text="del",command=delet)
 button_c.grid(row=7,columnspan=2,sticky=('nswe'))
+
+button_c=ttk.Button(cal,text="exit",command=cal.destroy)
+button_c.grid(row=7,column=2,columnspan=2,sticky=('nswe'))
 
 button_dec=ttk.Button(cal,text=".",command=lambda:press("."))
 button_dec.grid(row=5,column=0)
