@@ -4,6 +4,7 @@ import  tkinter.ttk as ttk
 cal=tk.Tk()
 cal.title("My Python Calculator")
 cal.iconbitmap(r'Calc.ico')
+
 exp=""
 text=tk.StringVar()
 
@@ -32,6 +33,7 @@ def delet():
 
 entry=ttk.Entry(cal,justify="right",textvariable=text)
 entry.grid(row=0,columnspan=5,sticky=('nsew'))
+entry.focus()
 #
 
 
@@ -68,8 +70,8 @@ button_9.grid(row=4,column=2)
 button_0=ttk.Button(cal,text="0",command=lambda:press('0'))
 button_0.grid(row=5,column=1)
 
-button_c=ttk.Button(cal,text="c",command=delet)
-button_c.grid(row=7,column=0)
+button_c=ttk.Button(cal,text="del",command=delet)
+button_c.grid(row=7,columnspan=2,sticky=('nswe'))
 
 button_dec=ttk.Button(cal,text=".",command=lambda:press("."))
 button_dec.grid(row=5,column=0)
@@ -100,6 +102,7 @@ button_equ.grid(row=6,columnspan=4,sticky=('nswe'))
 #button_0=ttk.Button(cal,text="0'')
 #button_0.grid(row=5,column=0)
 #error in pulling
+
 
 
 
