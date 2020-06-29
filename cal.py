@@ -1,3 +1,11 @@
+#idea_spot 
+"""
+1) Dark and white UI
+2) Sound O/P if possiable
+
+"""
+
+
 import tkinter as tk
 import  tkinter.ttk as ttk
 
