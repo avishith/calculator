@@ -1,17 +1,17 @@
 #idea_spot 
-"""
-1) Dark and white UI
-2) Sound O/P if possiable
 
-"""
+#1) Dark and white UI
+#2) Sound O/P if possiable
+
+#"""
 
 
 import tkinter as tk
-import  tkinter.ttk as ttk
+import  tkinter.ttk as ttk 
 
 cal=tk.Tk()
 cal.title("My Python Calculator")
-#cal.iconbitmap(r'Calc.ico')
+#cal.iconbitmap(r'Calc.png')
 
 exp=""
 text=tk.StringVar()
@@ -37,10 +37,16 @@ def delet():
 	exp=exp[0:(le-1)]
 	text.set(exp)
 
+mb=ttk.Menubutton(text="Settings")
+mb.grid(row=0,column=0,sticky=("nsew"))
+mb.menu = tk.Menu(mb)
 
+mb["menu"] =  mb.menu
+mb.menu.add_checkbutton ( label="Sound") 
+mb.menu.add_checkbutton ( label="Nightmode")
 
 entry=ttk.Entry(cal,justify="right",textvariable=text)
-entry.grid(row=0,columnspan=5,sticky=('nsew'))
+entry.grid(row=1,columnspan=5,sticky=('nsew'))
 entry.focus()
 #
 
