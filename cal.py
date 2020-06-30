@@ -28,8 +28,8 @@ def press(num):
 
 def eql():
 	global exp
-	ttl=str(eval(exp))
-	text.set(ttl)
+	exp=str(eval(exp))
+	text.set(exp)
 #delet the last degit
 def delet():
 	global exp
@@ -76,7 +76,7 @@ button_9=ttk.Button(cal,text="9",command=lambda:press('9'))
 button_9.grid(row=4,column=2)
 
 button_0=ttk.Button(cal,text="0",command=lambda:press('0'))
-button_0.grid(row=5,column=1)
+button_0.grid(row=5,column=1,sticky=('nswe'))
 
 button_c=ttk.Button(cal,text="del",command=delet)
 button_c.grid(row=7,columnspan=2,sticky=('nswe'))
