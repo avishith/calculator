@@ -2,14 +2,14 @@
 
 #1) Dark and white UI
 #2) Sound O/P if possiable
+#3)find alternate for winsound
 
 #"""
-
+from ttkthemes import ThemedStyle
 import os
 import tkinter as tk
 import  tkinter.ttk as ttk
-import winsound
-#from ttkthemes import themed_tk as th
+import random
 
 
 #ivade modules set cheyyam
@@ -18,10 +18,21 @@ import winsound
 except ModuleNotFoundError:
         os.system('pip install ttkthemes')
 '''
-winsound.PlaySound("filename",winsound.SND_FILENAME)
 
 cal=tk.Tk()
 cal.title("My Python Calculator")
+cal.geometry('200x150')
+
+
+def theme():
+	#theme=randomtheme()
+	m=["arc","black","winxpblue","itft1",'plastik',"breeze"]
+	m= m[random.randint(0,5)]
+	style = ThemedStyle(cal)
+	style.set_theme(m)
+#yes arc,black,winxpblue,plastik,itft1,breeze
+#no aquativo
+
 #cal=th.ThemedTk()
 #cal.set_theme('black')
 #cal.iconbitmap(r'calc_icon.ico')
@@ -69,8 +80,11 @@ mb.grid(row=0,column=0,sticky=("nsew"))
 mb.menu = tk.Menu(mb)
 
 mb["menu"] =  mb.menu
-mb.menu.add_checkbutton ( label="Sound",command=hai) 
-mb.menu.add_checkbutton ( label="Nightmode")
+mb.menu.add_checkbutton ( label="Sound") 
+mb.menu.add_checkbutton ( label="THEME",command=theme) 
+
+
+#( label="Change Theme",command=theme)
 
 entry=ttk.Entry(cal,justify="right",textvariable=text)
 entry.grid(row=1,columnspan=5,sticky=('nsew'))
