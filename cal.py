@@ -5,12 +5,25 @@
 
 #"""
 
-
+import os
 import tkinter as tk
-import  tkinter.ttk as ttk 
+import  tkinter.ttk as ttk
+import winsound
+#from ttkthemes import themed_tk as th
+
+
+#ivade modules set cheyyam
+'''try:
+        from ttkthemes import themed_tk as th
+except ModuleNotFoundError:
+        os.system('pip install ttkthemes')
+'''
+winsound.PlaySound("filename",winsound.SND_FILENAME)
 
 cal=tk.Tk()
 cal.title("My Python Calculator")
+#cal=th.ThemedTk()
+#cal.set_theme('black')
 #cal.iconbitmap(r'calc_icon.ico')
 
 
@@ -36,8 +49,8 @@ def eql():
                 text.set("Math Error occured...!")
         except SyntaxError:
                 text.set("Syntax Error occured...!")
-     
-
+def hai():
+        print('hai')
 	
 #delet the last degit
 def delet():
@@ -45,13 +58,18 @@ def delet():
 	le=len(exp)
 	exp=exp[0:(le-1)]
 	text.set(exp)
+'''
+def exi():
+        exit()
+        print("Thanks for using my calculator")
+'''	
 
 mb=ttk.Menubutton(text="Settings")
 mb.grid(row=0,column=0,sticky=("nsew"))
 mb.menu = tk.Menu(mb)
 
 mb["menu"] =  mb.menu
-mb.menu.add_checkbutton ( label="Sound") 
+mb.menu.add_checkbutton ( label="Sound",command=hai) 
 mb.menu.add_checkbutton ( label="Nightmode")
 
 entry=ttk.Entry(cal,justify="right",textvariable=text)
