@@ -13,6 +13,7 @@ cal=tk.Tk()
 cal.title("My Python Calculator")
 #cal.iconbitmap(r'calc_icon.ico')
 
+
 exp=""
 text=tk.StringVar()
 
@@ -27,9 +28,17 @@ def press(num):
 	text.set(exp)
 
 def eql():
-	global exp
-	exp=str(eval(exp))
-	text.set(exp)
+        try:
+            global exp
+            exp=str(eval(exp))
+            text.set(exp)
+        except ZeroDivisionError:
+                text.set("Math Error occured...!")
+        except SyntaxError:
+                text.set("Syntax Error occured...!")
+     
+
+	
 #delet the last degit
 def delet():
 	global exp
@@ -54,7 +63,7 @@ entry.focus()
 button_1=ttk.Button(cal,text="1",command=lambda:press('1'))
 button_1.grid(row=2,column=0)
 
-button_1.bind('<1>',button_1)
+#button_1.bind('<1>',button_1)
 
 button_2=ttk.Button(cal,text="2",command=lambda:press(2))
 button_2.grid(row=2,column=1)
@@ -123,5 +132,9 @@ button_equ.grid(row=6,columnspan=4,sticky=('nswe'))
 
 
 
-
 cal.mainloop()
+
+
+
+
+
