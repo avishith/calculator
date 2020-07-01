@@ -11,7 +11,7 @@ import  tkinter.ttk as ttk
 
 cal=tk.Tk()
 cal.title("My Python Calculator")
-#cal.iconbitmap(r'Calc.png')
+#cal.iconbitmap(r'calc_icon.ico')
 
 exp=""
 text=tk.StringVar()
