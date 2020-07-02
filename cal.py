@@ -4,7 +4,7 @@
 #2) Sound O/P if possiable
 #3)find alternate for winsound
 
-'''=====importing  the frame works===='''
+#======importing  the frame works====
  
 from ttkthemes import ThemedStyle
 import os
@@ -23,11 +23,11 @@ except ModuleNotFoundError:
 '''
 
 
-'''=====function for theme======'''
+#======function for theme======='''
 
 def theme():
-	m=["arc","black","winxpblue","itft1",'plastik',"breeze"]
-	m= m[random.randint(0,5)]
+	m=["classic","black"]#"winxpblue","itft1",'plastik',"breeze"]
+	m= m[random.randint(0,1)]
 	style = ThemedStyle(cal)
 	style.set_theme(m)
 
@@ -35,21 +35,21 @@ def theme():
 #cal.set_theme('black')
 #cal.iconbitmap(r'calc_icon.ico')
 
-'''=====function for clear button======'''
+#=====Function for clear button======
 
 def clear():
 	global exp
 	exp=""
 	text.set(exp)
 	
-'''====function for number press===='''
+#======Function for number press=====
 	
 def press(num):
 	global exp
 	exp += str(num)
 	text.set(exp)
 	
-'''======functoion for equl to========'''
+#========Functoion for equl to=======
 
 def eql():
         try:
@@ -61,7 +61,7 @@ def eql():
         except SyntaxError:
                 text.set("Syntax Error occured...!")
 	
-"""========delet the last degit======="""
+#========Delet the last degit=========
 
 def delet():
 	global exp
@@ -79,14 +79,17 @@ def exi():
 cal=tk.Tk()
 cal.title("My Python Calculator")
 cal.geometry('200x150')
+cal.resizable(0,0)
+style = ThemedStyle(cal)
+style.set_theme("classic")
 
 exp=""
 text=tk.StringVar()
 
 #menu setting for calculotor
 
-mb=ttk.Menubutton(text="Settings")
-mb.grid(row=0,column=0,sticky=("nsew"))
+mb=ttk.Menubutton(cal,text="Settings")
+mb.grid(row=0,column=0)
 mb.menu = tk.Menu(mb)
 
 mb["menu"] =  mb.menu
@@ -96,12 +99,12 @@ mb.menu.add_checkbutton ( label="THEME",command=theme)
 
 #( label="Change Theme",command=theme)
 
-entry=ttk.Entry(cal,justify="right",textvariable=text)
-entry.grid(row=1,columnspan=5,sticky=('nsew'))
+entry=tk.Entry(cal,justify="right",font=("aril",20,'bold'),textvariable=text,bd=30,insertwidth=4,bg='gray')
+entry.grid(row=1,columnspan=4,sticky=('nsew'))
 entry.focus()
 
 
-#=======BUttons========
+#===========BUttons===============
 
 
 button_1=ttk.Button(cal,text="1",command=lambda:press('1'))
@@ -133,7 +136,7 @@ button_9=ttk.Button(cal,text="9",command=lambda:press('9'))
 button_9.grid(row=4,column=2)
 
 button_0=ttk.Button(cal,text="0",command=lambda:press('0'))
-button_0.grid(row=5,column=1,sticky=('nswe'))
+button_0.grid(row=5,column=1)
 
 button_dec=ttk.Button(cal,text=".",command=lambda:press("."))
 button_dec.grid(row=5,column=0)
@@ -160,6 +163,8 @@ button_c.grid(row=7,columnspan=2,sticky=('nswe'))
 button_c=ttk.Button(cal,text="exit",command=cal.destroy)
 button_c.grid(row=7,column=2,columnspan=2,sticky=('nswe'))
 
-button_clr=ttk.Button(cal,text="clear",command=clear)
+button_clr=ttk.Button(cal,text="C",command=clear)
 button_clr.grid(row=5,column=2)
 cal.mainloop()
+
+#============END=============
