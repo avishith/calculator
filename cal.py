@@ -4,12 +4,15 @@
 #2) Sound O/P if possiable
 #3)find alternate for winsound
 
-#"""
+'''=====importing  the frame works===='''
+ 
 from ttkthemes import ThemedStyle
 import os
 import tkinter as tk
 import  tkinter.ttk as ttk
 import random
+
+#from ttkthemes import themed_tk as th
 
 
 #ivade modules set cheyyam
@@ -19,37 +22,34 @@ except ModuleNotFoundError:
         os.system('pip install ttkthemes')
 '''
 
-cal=tk.Tk()
-cal.title("My Python Calculator")
-cal.geometry('200x150')
 
+'''=====function for theme======'''
 
 def theme():
-	#theme=randomtheme()
 	m=["arc","black","winxpblue","itft1",'plastik',"breeze"]
 	m= m[random.randint(0,5)]
 	style = ThemedStyle(cal)
 	style.set_theme(m)
-#yes arc,black,winxpblue,plastik,itft1,breeze
-#no aquativo
 
 #cal=th.ThemedTk()
 #cal.set_theme('black')
 #cal.iconbitmap(r'calc_icon.ico')
 
-
-exp=""
-text=tk.StringVar()
+'''=====function for clear button======'''
 
 def clear():
 	global exp
 	exp=""
 	text.set(exp)
 	
+'''====function for number press===='''
+	
 def press(num):
 	global exp
 	exp += str(num)
 	text.set(exp)
+	
+'''======functoion for equl to========'''
 
 def eql():
         try:
@@ -60,10 +60,9 @@ def eql():
                 text.set("Math Error occured...!")
         except SyntaxError:
                 text.set("Syntax Error occured...!")
-def hai():
-        print('hai')
 	
-#delet the last degit
+"""========delet the last degit======="""
+
 def delet():
 	global exp
 	le=len(exp)
@@ -73,7 +72,18 @@ def delet():
 def exi():
         exit()
         print("Thanks for using my calculator")
+	
 '''	
+
+
+cal=tk.Tk()
+cal.title("My Python Calculator")
+cal.geometry('200x150')
+
+exp=""
+text=tk.StringVar()
+
+#menu setting for calculotor
 
 mb=ttk.Menubutton(text="Settings")
 mb.grid(row=0,column=0,sticky=("nsew"))
@@ -89,13 +99,13 @@ mb.menu.add_checkbutton ( label="THEME",command=theme)
 entry=ttk.Entry(cal,justify="right",textvariable=text)
 entry.grid(row=1,columnspan=5,sticky=('nsew'))
 entry.focus()
-#
+
+
+'''=======BUttons========"""
 
 
 button_1=ttk.Button(cal,text="1",command=lambda:press('1'))
 button_1.grid(row=2,column=0)
-
-#button_1.bind('<1>',button_1)
 
 button_2=ttk.Button(cal,text="2",command=lambda:press(2))
 button_2.grid(row=2,column=1)
@@ -125,17 +135,8 @@ button_9.grid(row=4,column=2)
 button_0=ttk.Button(cal,text="0",command=lambda:press('0'))
 button_0.grid(row=5,column=1,sticky=('nswe'))
 
-button_c=ttk.Button(cal,text="del",command=delet)
-button_c.grid(row=7,columnspan=2,sticky=('nswe'))
-
-button_c=ttk.Button(cal,text="exit",command=cal.destroy)
-button_c.grid(row=7,column=2,columnspan=2,sticky=('nswe'))
-
 button_dec=ttk.Button(cal,text=".",command=lambda:press("."))
 button_dec.grid(row=5,column=0)
-
-button_clr=ttk.Button(cal,text="clear",command=clear)
-button_clr.grid(row=5,column=2)
 
 button_plus=ttk.Button(cal,text="+",command=lambda:press('+'))
 button_plus.grid(row=2,column=3)
@@ -152,16 +153,15 @@ button_div.grid(row=5,column=3)
 button_equ=ttk.Button(cal,text="=",command=eql)
 button_equ.grid(row=6,columnspan=4,sticky=('nswe'))
 
-#button_equ=ttk.Button(cal,text="=")
-#button_equ.grid(column=4,rowspan=2,sticky=('nswe'))
 
+button_c=ttk.Button(cal,text="del",command=delet)
+button_c.grid(row=7,columnspan=2,sticky=('nswe'))
 
+button_c=ttk.Button(cal,text="exit",command=cal.destroy)
+button_c.grid(row=7,column=2,columnspan=2,sticky=('nswe'))
 
-#button_0=ttk.Button(cal,text="0'')
-#button_0.grid(row=5,column=0)
-#error in pulling
-
-
+button_clr=ttk.Button(cal,text="clear",command=clear)
+button_clr.grid(row=5,column=2)
 
 
 cal.mainloop()
