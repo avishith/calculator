@@ -101,7 +101,7 @@ entry.grid(row=1,columnspan=5,sticky=('nsew'))
 entry.focus()
 
 
-'''=======BUttons========"""
+#=======BUttons========
 
 
 button_1=ttk.Button(cal,text="1",command=lambda:press('1'))
@@ -162,11 +162,4 @@ button_c.grid(row=7,column=2,columnspan=2,sticky=('nswe'))
 
 button_clr=ttk.Button(cal,text="clear",command=clear)
 button_clr.grid(row=5,column=2)
-
-
 cal.mainloop()
-
-
-
-
-
