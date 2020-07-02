@@ -79,7 +79,6 @@ def exi():
 cal=tk.Tk()
 cal.title("My Python Calculator")
 cal.geometry('200x150')
-cal.resizable(0,0)
 style = ThemedStyle(cal)
 style.set_theme("classic")
 
@@ -114,7 +113,7 @@ button_2=ttk.Button(cal,text="2",command=lambda:press(2))
 button_2.grid(row=2,column=1)
 
 button_3=ttk.Button(cal,text="3",command=lambda:press(3))
-button_3.grid(row=2,column=2)
+button_3.grid(row=2,column=2,sticky=('nsew'),padx=16)
 
 button_4=ttk.Button(cal,text="4",command=lambda:press('4'))
 button_4.grid(row=3,column=0)
