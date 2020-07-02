@@ -8,7 +8,6 @@
 import os
 import tkinter as tk
 import  tkinter.ttk as ttk
-import winsound
 #from ttkthemes import themed_tk as th
 
 
@@ -18,7 +17,7 @@ import winsound
 except ModuleNotFoundError:
         os.system('pip install ttkthemes')
 '''
-winsound.PlaySound("filename",winsound.SND_FILENAME)
+
 
 cal=tk.Tk()
 cal.title("My Python Calculator")
@@ -62,15 +61,22 @@ def delet():
 def exi():
         exit()
         print("Thanks for using my calculator")
+	
 '''	
+def theme():
+	#theme=randomtheme()
+	m=["arc","black","winxpblue","itft1",'plastik',"breeze"]
+	m= m[random.randint(0,5)]
+	style = ThemedStyle(cal)
+	style.set_theme(m)
 
 mb=ttk.Menubutton(text="Settings")
 mb.grid(row=0,column=0,sticky=("nsew"))
 mb.menu = tk.Menu(mb)
 
 mb["menu"] =  mb.menu
-mb.menu.add_checkbutton ( label="Sound",command=hai) 
-mb.menu.add_checkbutton ( label="Nightmode")
+mb.menu.add_checkbutton ( label="Sound") 
+mb.menu.add_checkbutton ( label="THEME",command=theme) 
 
 entry=ttk.Entry(cal,justify="right",textvariable=text)
 entry.grid(row=1,columnspan=5,sticky=('nsew'))
