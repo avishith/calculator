@@ -64,6 +64,11 @@ def theme():
 
 def help():
 	showinfo( "Help",'MATH ERROR :                     Cause: The calculation result is outside of the allowable calculation range or you are trying to perform an illegal mathematical operation (such as division by zero)                                 SYNTAX ERROR : A syntax error is one of several types of errors on calculators (most commonly found on scientific calculators and graphing calculators), representing that the equation that has been input has incorrect syntax of numbers, operations and so on')
+#============exit===========
+
+def exit():
+	showinfo("Calculator", "DO YOU REALLY WANTS TO EXIT..?")
+	button_exit.command=cal.destroy
 
 #=====Function for clear button======
 
@@ -192,8 +197,8 @@ button_equ.grid(row=6,columnspan=4,pady=20,sticky=('nswe'))
 button_c=ttk.Button(cal,text="del",command=delet)
 button_c.grid(row=7,columnspan=2,sticky=('nswe'),pady=20,padx=20)
 
-button_c=ttk.Button(cal,text="exit",command=cal.destroy)
-button_c.grid(row=7,column=2,columnspan=2,sticky=('nswe'),pady=20)
+button_exit=ttk.Button(cal,text="exit",command=exit)
+button_exit.grid(row=7,column=2,columnspan=2,sticky=('nswe'),pady=20)
 
 button_clr=ttk.Button(cal,text="C",command=clear)
 button_clr.grid(row=5,column=2,pady=20)
