@@ -26,10 +26,34 @@ except ModuleNotFoundError:
 #======function for theme======='''
 
 def theme():
-	m=["classic","black","winxpblue","itft1",'plastik',"breeze"]
-	m= m[random.randint(1,6)]
-	style = ThemedStyle(cal)
-	style.set_theme(m)
+	global a
+	if a==0:
+		style = ThemedStyle(cal)
+		style.set_theme('plastik')
+		a=1
+	
+	elif a==1:	
+		style = ThemedStyle(cal)
+		style.set_theme("black")
+		a=2
+	elif a==2:
+		style = ThemedStyle(cal)
+		style.set_theme('breeze')
+		a=3
+	
+	elif a==3:	
+		style = ThemedStyle(cal)
+		style.set_theme("yaru")
+		a=4
+		
+	elif a==4:	
+		style = ThemedStyle(cal)
+		style.set_theme("alt")
+		a=0
+		
+	'''m=["classic","black","alt","winxpblue",'plastik',"breeze"]
+	m= m[random.randint(0,5)]'''
+	
 
 #cal=th.ThemedTk()
 #cal.set_theme('black')
@@ -80,8 +104,8 @@ cal=tk.Tk()
 cal.title("My Python Calculator")
 cal.geometry('200x150')
 style = ThemedStyle(cal)
-style.set_theme("classic")
-
+style.set_theme("alt")
+a=0#variable for theme
 exp=""
 text=tk.StringVar()
 
@@ -91,9 +115,9 @@ mb=tk.Menubutton(cal,text="options")
 mb.grid(row=0,column=0)
 mb.menu = tk.Menu(mb)
 
-mb=tk.Menubutton(cal,text="help")
-mb.grid(row=0,column=1)
-mb.menu = tk.Menu(mb)
+mb2=tk.Menubutton(cal,text="help")
+mb2.grid(row=0,column=1)
+mb2.menu = tk.Menu(mb2)
 
 mb["menu"] =  mb.menu
 mb.menu.add_checkbutton ( label="Sound") 
