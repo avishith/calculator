@@ -10,6 +10,7 @@ from ttkthemes import ThemedStyle
 import os
 import tkinter as tk
 import  tkinter.ttk as ttk
+from tkinter.messagebox import showinfo
 import random
 
 #from ttkthemes import themed_tk as th
@@ -59,6 +60,11 @@ def theme():
 #cal.set_theme('black')
 #cal.iconbitmap(r'calc_icon.ico')
 
+#=========help====+====
+
+def help():
+	showinfo( "Help",'MATH ERROR :                     Cause: The calculation result is outside of the allowable calculation range or you are trying to perform an illegal mathematical operation (such as division by zero)                                 SYNTAX ERROR : A syntax error is one of several types of errors on calculators (most commonly found on scientific calculators and graphing calculators), representing that the equation that has been input has incorrect syntax of numbers, operations and so on')
+
 #=====Function for clear button======
 
 def clear():
@@ -102,7 +108,7 @@ def exi():
 
 cal=tk.Tk()
 cal.title("My Python Calculator")
-cal.geometry('200x150')
+cal.geometry('400x150')
 style = ThemedStyle(cal)
 style.set_theme("alt")
 a=0#variable for theme
@@ -111,13 +117,12 @@ text=tk.StringVar()
 
 #menu setting for calculotor
 
-mb=tk.Menubutton(cal,text="options")
+mb=ttk.Menubutton(cal,text="options",width=5)
 mb.grid(row=0,column=0)
 mb.menu = tk.Menu(mb)
 
-mb2=tk.Menubutton(cal,text="help")
-mb2.grid(row=0,column=1)
-mb2.menu = tk.Menu(mb2)
+help=ttk.Button(cal,text="Help",command=help)
+help.grid(row=0,column=1)
 
 mb["menu"] =  mb.menu
 mb.menu.add_checkbutton ( label="Sound") 
@@ -134,7 +139,7 @@ entry.focus()
 #===========BUttons===============
 
 
-button_1=ttk.Button(cal,text="1",command=lambda:press('1'))
+button_1=ttk.Button(cal,text="1",width=5,command=lambda:press('1'))
 button_1.grid(row=2,column=0,pady=20)#padx=16,pady=16)
 
 button_2=ttk.Button(cal,text="2",command=lambda:press(2))
