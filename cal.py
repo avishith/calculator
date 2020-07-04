@@ -10,8 +10,7 @@ from ttkthemes import ThemedStyle
 import os
 import tkinter as tk
 import  tkinter.ttk as ttk
-from tkinter.messagebox import showinfo
-import random
+import tkinter.messagebox as msg
 
 #from ttkthemes import themed_tk as th
 
@@ -63,11 +62,11 @@ def theme():
 #=========help====+====
 
 def help():
-	showinfo( "Help",'MATH ERROR :                     Cause: The calculation result is outside of the allowable calculation range or you are trying to perform an illegal mathematical operation (such as division by zero)                                 SYNTAX ERROR : A syntax error is one of several types of errors on calculators (most commonly found on scientific calculators and graphing calculators), representing that the equation that has been input has incorrect syntax of numbers, operations and so on')
+	msg.showinfo( 'Help','MATH ERROR :               Syntax Eroor :')
 #============exit===========
 
 def exit():
-	showinfo("Calculator", "DO YOU REALLY WANTS TO EXIT..?")
+	msg.showwarning("Calculator", "DO YOU REALLY WANTS TO EXIT..?")
 	button_exit.command=cal.destroy
 
 #=====Function for clear button======
