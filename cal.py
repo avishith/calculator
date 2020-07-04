@@ -11,8 +11,16 @@ import os
 import tkinter as tk
 import  tkinter.ttk as ttk
 import tkinter.messagebox as msg
+import simpleaudio as s
 
-#from ttkthemes import themed_tk as th
+#_______________sounds_______________
+welcome = s.WaveObject.from_wave_file("welcome.wav")
+button_sound = s.WaveObject.from_wave_file("buttons.wav")
+math_error = s.WaveObject.from_wave_file("matherror.wav")
+syn_error = s.WaveObject.from_wave_file("syntax_error.wav")
+delete_sound = s.WaveObject.from_wave_file("delete.wav")
+thanks = s.WaveObject.from_wave_file("thanks.wav")
+result = s.WaveObject.from_wave_file("result.wav")
 
 
 #ivade modules set cheyyam
@@ -66,16 +74,15 @@ def help():
 #============exit===========
 
 def exit():
-    MsgBox = msg.askquestion ('Exit Application','Are you sure you want to exit the application')
-    if MsgBox == 'yes':
-       cal.destroy()
-
-        
+	msg.showwarning("Calculator", "DO YOU REALLY WANTS TO EXIT..?")
+	button_exit.command=cal.destroy
+	thanks.play()
 
 #=====Function for clear button======
 
 def clear():
 	global exp
+	delete_sound.play()
 	exp=""
 	text.set(exp)
 	
@@ -83,6 +90,7 @@ def clear():
 	
 def press(num):
 	global exp
+	button_sound.play()
 	exp += str(num)
 	text.set(exp)
 	
@@ -91,17 +99,21 @@ def press(num):
 def eql():
         try:
             global exp
+            result.play()
             exp=str(eval(exp))
             text.set(exp)
         except ZeroDivisionError:
+                math_error.play()
                 text.set("Math Error occured...!")
         except SyntaxError:
+                syn_error.play()
                 text.set("Syntax Error occured...!")
 	
 #========Delet the last degit=========
 
 def delet():
 	global exp
+	delete_sound.play()
 	le=len(exp)
 	exp=exp[0:(le-1)]
 	text.set(exp)
@@ -112,10 +124,11 @@ def exi():
 	
 '''	
 
-
+welcome.play()
 cal=tk.Tk()
 cal.title("My Python Calculator")
-cal.geometry('400x150')
+cal.geometry('360x550')
+cal.resizable(0,0)
 style = ThemedStyle(cal)
 style.set_theme("alt")
 a=0#variable for theme
@@ -124,15 +137,15 @@ text=tk.StringVar()
 
 #menu setting for calculotor
 
-mb=ttk.Menubutton(cal,text="options",width=5)
+mb=ttk.Menubutton(cal,text="MENU",width=5)
 mb.grid(row=0,column=0)
 mb.menu = tk.Menu(mb)
 
-help=ttk.Button(cal,text="Help",command=help)
+help=ttk.Button(cal,text="HELP",command=help)
 help.grid(row=0,column=1)
 
 mb["menu"] =  mb.menu
-mb.menu.add_checkbutton ( label="Sound") 
+mb.menu.add_checkbutton ( label="SOUND") 
 mb.menu.add_checkbutton ( label="THEME",command=theme) 
 
 
@@ -146,7 +159,7 @@ entry.focus()
 #===========BUttons===============
 
 
-button_1=ttk.Button(cal,text="1",width=5,command=lambda:press('1'))
+button_1=ttk.Button(cal,text="1",command=lambda:press('1'))
 button_1.grid(row=2,column=0,pady=20)#padx=16,pady=16)
 
 button_2=ttk.Button(cal,text="2",command=lambda:press(2))
@@ -200,7 +213,7 @@ button_c=ttk.Button(cal,text="del",command=delet)
 button_c.grid(row=7,columnspan=2,sticky=('nswe'),pady=20,padx=20)
 
 button_exit=ttk.Button(cal,text="exit",command=exit)
-button_exit.grid(row=7,column=2,columnspan=2,sticky=('nswe'),pady=20)
+button_exit.grid(row=7,column=2,columnspan=2,sticky=('nswe'),pady=20,padx=20)
 
 button_clr=ttk.Button(cal,text="C",command=clear)
 button_clr.grid(row=5,column=2,pady=20)
