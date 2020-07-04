@@ -66,8 +66,11 @@ def help():
 #============exit===========
 
 def exit():
-	msg.showwarning("Calculator", "DO YOU REALLY WANTS TO EXIT..?")
-	button_exit.command=cal.destroy
+    MsgBox = msg.askquestion ('Exit Application','Are you sure you want to exit the application')
+    if MsgBox == 'yes':
+       cal.destroy()
+
+        
 
 #=====Function for clear button======
 
