@@ -77,7 +77,13 @@ def help():
 def exit():
 	msg.showwarning("Calculator", "DO YOU REALLY WANTS TO EXIT..?")
 	button_exit.command=cal.destroy
-	thanks.play()
+	
+	
+def exit():
+    MsgBox = msg.askquestion ('Exit Application','Are you sure you want to exit the application')
+    if MsgBox == 'yes':
+       cal.destroy()
+       #thanks.play()
 	#===============scientific calculator==============
 
 def sci():
