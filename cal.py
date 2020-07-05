@@ -9,15 +9,12 @@
 #_______________Download when module error occuring_______________
 
 import os
-try:
-        from ttkthemes import ThemedStyle
-except ModuleNotFoundError:
-        #we need to set a askquestion for downloading->when it is true install module otherwise goto exit() function
-        os.system('pip install ttkthemes')
-
+os.system('pip install -r req.txt')
+import tkinter.messagebox as msg
+from ttkthemes import ThemedStyle
 import tkinter as tk
 import  tkinter.ttk as ttk
-import tkinter.messagebox as msg
+
 import simpleaudio as s
 from math import *
 
@@ -161,7 +158,11 @@ def exi():
 cal=tk.Tk()
 cal.title("My Python Calculator")
 cal.geometry('385x580')
+cal.iconbitmap(r'calc_icon.ico')
 cal.resizable(0,0)
+
+
+
 style = ThemedStyle(cal)
 style.set_theme("alt")
 a=0#variable for theme
