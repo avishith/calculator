@@ -1,44 +1,35 @@
-#idea_spot
+#_______________________________________________________________MyPythonCalculator_______________________________________________________________
 
 
-#1) Dark and white UI
-#2) Sound O/P if possiable
-#3)find alternate for winsound
-
-#======importing  the frame works====
-#_______________Download when module error occuring_______________
-
+#_______________________________Downloading Modules_______________________________
 import os
 os.system('pip install -r req.txt')
+#_______________________________Importing Modules_________________________________
 import tkinter.messagebox as msg
 from ttkthemes import ThemedStyle
 import tkinter as tk
 import  tkinter.ttk as ttk
-
 import simpleaudio as s
 from math import *
 
+#____________________________________Sounds_______________________________________
 
-'''#_______________sounds_______________
-welcome = s.WaveObject.from_wave_file("welcome.wav")
-button_sound = s.WaveObject.from_wave_file("buttons.wav")
-math_error = s.WaveObject.from_wave_file("matherror.wav")
-syn_error = s.WaveObject.from_wave_file("syntax_error.wav")
-delete_sound = s.WaveObject.from_wave_file("delete.wav")
-thanks = s.WaveObject.from_wave_file("calcthanks.wav")
-result = s.WaveObject.from_wave_file("result.wav")
-'''
+'''welcome = s.WaveObject.from_wave_file("medias\\welcome.wav")
+button_sound = s.WaveObject.from_wave_file("medias\\buttons.wav")
+math_error = s.WaveObject.from_wave_file("medias\\matherror.wav")
+syn_error = s.WaveObject.from_wave_file("medias\\syntax_error.wav")
+delete_sound = s.WaveObject.from_wave_file("medias\\delete.wav")
+thanks = s.WaveObject.from_wave_file("medias\\thanks.wav")
+result = s.WaveObject.from_wave_file("medias\\result.wav")'''
 
+#_____________________________________Help________________________________________
 
-#ivade modules set cheyyam
-'''try:
-        from ttkthemes import themed_tk as th
-except ModuleNotFoundError:
-        os.system('pip install ttkthemes')
-'''
+error_statement='''A syntax error is one of several types of errors on calculators
+representing that the equation that has been input has incorrect syntax of numbers,operations and so on.
 
+The calculation result is outside of the allowable calculation range or you are trying to perform an illegal mathematical operation (such as division by zero)'''
 
-#======function for theme======='''
+#_____________________________________Theme________________________________________
 
 def theme():
 	global a
@@ -61,51 +52,45 @@ def theme():
 		style.set_theme("alt")
 		a=0
 		
-	'''m=["classic","black","alt","winxpblue",'plastik',"breeze"]
+	'''These are themes m=["classic","black","alt","winxpblue",'plastik',"breeze"]
 	m= m[random.randint(0,5)]'''
 	
-
-#cal=th.ThemedTk()
-#cal.set_theme('black')
-#cal.iconbitmap(r'calc_icon.ico')
-
-#=========help====+====
+#_____________________________________Help________________________________________
 
 def help():
-	msg.showinfo( 'Help','MATH ERROR :               Syntax Eroor :')
-#============exit===========
+	msg.showinfo( 'Help',error_statement)
+	
+#_____________________________________Exit________________________________________
 
 def exit():
+    #thanks.play()
     MsgBox = msg.askquestion ('Exit Application','Are you sure you want to exit the application')
     if MsgBox == 'yes':
        cal.destroy()
-	#===============scientific calculator==============
+    print('Thanks For Using Our Calculator...!')
+#__________________________________Scientific_____________________________________
 
 def sci():
 	global s
 	
 	if s==1:
 		button_sin=ttk.Button(cal,text="sin",command=lambda:press('sin'))
-		button_sin.grid(row=2,column=0,pady=20)#padx=16,pady=16)
+		button_sin.grid(row=2,column=0,pady=20)
 		
 		button_cos=ttk.Button(cal,text="cos",command=lambda:press("cos"))
 		button_cos.grid(row=2,column=1,pady=20)
 		
 		button_tan=ttk.Button(cal,text="tan",command=lambda:press("tan"))
-		button_tan.grid(row=2,column=2,pady=20)#,padx=16)
+		button_tan.grid(row=2,column=2,pady=20)
 		
 		button_log=ttk.Button(cal,text="log",command=lambda:press("log"))
-		button_log.grid(row=2,column=3,pady=20)#,padx=16)
+		button_log.grid(row=2,column=3,pady=20)
 		s=0
 	elif a==0:
 		button_log.grid_forget()
 		s=1
-	
-	
-	                
 
-
-#=====Function for clear button======
+#_____________________________________Clear________________________________________
 
 def clear():
 	global exp
@@ -113,7 +98,7 @@ def clear():
 	exp=""
 	text.set(exp)
 	
-#======Function for number press=====
+#______________________________________Press________________________________________
 	
 def press(num):
 	global exp
@@ -121,7 +106,7 @@ def press(num):
 	exp += str(num)
 	text.set(exp)
 	
-#========Functoion for equl to=======
+#_____________________________________Answer________________________________________
 
 def eql():
         try:
@@ -138,8 +123,8 @@ def eql():
         except NameError:
          	#math_error.play()
          	text.set('Syntax Error occured....!')
-	
-#========Delet the last degit=========
+
+#___________________________________Backspace_______________________________________
 
 def delet():
 	global exp
@@ -147,21 +132,15 @@ def delet():
 	le=len(exp)
 	exp=exp[0:(le-1)]
 	text.set(exp)
-'''
-def exi():
-        exit()
-        print("Thanks for using my calculator")
-	
-'''	
+
+#_____________________________________Main________________________________________
 
 #welcome.play()
 cal=tk.Tk()
 cal.title("My Python Calculator")
 cal.geometry('385x580')
-cal.iconbitmap(r'calc_icon.ico')
+cal.iconbitmap(r'medias\\calc_icon.ico')
 cal.resizable(0,0)
-
-
 
 style = ThemedStyle(cal)
 style.set_theme("alt")
@@ -170,7 +149,7 @@ s=1
 exp=""
 text=tk.StringVar()
 
-#menu setting for calculotor
+#_____________________________________Nav-Bar________________________________________
 
 mb=ttk.Menubutton(cal,text="MENU",width=5)
 mb.grid(row=0,column=0)
@@ -183,15 +162,13 @@ mb["menu"] =  mb.menu
 mb.menu.add_command ( label="THEME",command=theme) 
 mb.menu.add_checkbutton ( label="SCIENTIFIC",command=sci)
 
-#( label="Change Theme",command=theme)
+#_____________________________________Entry________________________________________
 
 entry=tk.Entry(cal,justify="right",font=("aril",20,'bold'),textvariable=text,bd=30,insertwidth=4,bg='gray')
 entry.grid(row=1,columnspan=4,sticky=('nsew'))
 entry.focus()
 
-
-#===========BUttons===============
-
+#_____________________________________Keypad________________________________________
 
 button_1=ttk.Button(cal,text="1",command=lambda:press('1'))
 button_1.grid(row=3,column=0,pady=20)#padx=16,pady=16)
@@ -244,9 +221,6 @@ button_equ=ttk.Button(cal,text="=",command=eql)
 button_equ.grid(row=7,column=1,columnspan=2,pady=20,sticky=('nswe'))
 cal.bind("<Return>",eql)
 
-
-
-
 button_c=ttk.Button(cal,text="del",command=delet)
 button_c.grid(row=8,columnspan=2,sticky=('nswe'),pady=20,padx=20)
 
@@ -259,11 +233,9 @@ button_open.grid(row=7,column=0,pady=20,padx=20,sticky=('nswe'))
 button_close=ttk.Button(cal,text=")",command=lambda:press(")"))
 button_close.grid(row=7,column=3,pady=20,padx=20,sticky=('nswe'))
 
-
-
 button_clr=ttk.Button(cal,text="C",command=clear)
 button_clr.grid(row=6,column=2,pady=20)
 
 cal.mainloop()
 
-#============END=============
+#_____________________________________DEAD-END________________________________________
