@@ -1,18 +1,26 @@
-#idea_spot 
+#idea_spot
+
 
 #1) Dark and white UI
 #2) Sound O/P if possiable
 #3)find alternate for winsound
 
 #======importing  the frame works====
- 
-from ttkthemes import ThemedStyle
+#_______________Download when module error occuring_______________
+
 import os
+try:
+        from ttkthemes import ThemedStyle
+except ModuleNotFoundError:
+        #we need to set a askquestion for downloading->when it is true install module otherwise goto exit() function
+        os.system('pip install ttkthemes')
+
 import tkinter as tk
 import  tkinter.ttk as ttk
 import tkinter.messagebox as msg
-#import simpleaudio as s
+import simpleaudio as s
 from math import *
+
 
 '''#_______________sounds_______________
 welcome = s.WaveObject.from_wave_file("welcome.wav")
@@ -20,8 +28,9 @@ button_sound = s.WaveObject.from_wave_file("buttons.wav")
 math_error = s.WaveObject.from_wave_file("matherror.wav")
 syn_error = s.WaveObject.from_wave_file("syntax_error.wav")
 delete_sound = s.WaveObject.from_wave_file("delete.wav")
-thanks = s.WaveObject.from_wave_file("thanks.wav")
-result = s.WaveObject.from_wave_file("result.wav")'''
+thanks = s.WaveObject.from_wave_file("calcthanks.wav")
+result = s.WaveObject.from_wave_file("result.wav")
+'''
 
 
 #ivade modules set cheyyam
@@ -38,24 +47,19 @@ def theme():
 	global a
 	if a==0:
 		style = ThemedStyle(cal)
-		style.set_theme('plastik')
+		style.set_theme('black')
 		a=1
 	
 	elif a==1:	
 		style = ThemedStyle(cal)
-		style.set_theme("black")
+		style.set_theme("plastik")
 		a=2
-	elif a==2:
-		style = ThemedStyle(cal)
-		style.set_theme('breeze')
-		a=3
-	
-	elif a==3:	
-		style = ThemedStyle(cal)
-		style.set_theme("yaru")
-		a=4
 		
-	elif a==4:	
+	elif a==2:	
+		style = ThemedStyle(cal)
+		style.set_theme("blue")
+		a=3
+	elif a==3:	
 		style = ThemedStyle(cal)
 		style.set_theme("alt")
 		a=0
@@ -75,15 +79,9 @@ def help():
 #============exit===========
 
 def exit():
-	msg.showwarning("Calculator", "DO YOU REALLY WANTS TO EXIT..?")
-	button_exit.command=cal.destroy
-	
-	
-def exit():
     MsgBox = msg.askquestion ('Exit Application','Are you sure you want to exit the application')
     if MsgBox == 'yes':
        cal.destroy()
-       #thanks.play()
 	#===============scientific calculator==============
 
 def sci():
@@ -162,7 +160,7 @@ def exi():
 #welcome.play()
 cal=tk.Tk()
 cal.title("My Python Calculator")
-cal.geometry('360x550')
+cal.geometry('385x580')
 cal.resizable(0,0)
 style = ThemedStyle(cal)
 style.set_theme("alt")
@@ -175,15 +173,14 @@ text=tk.StringVar()
 
 mb=ttk.Menubutton(cal,text="MENU",width=5)
 mb.grid(row=0,column=0)
-mb.menu = tk.Menu(mb)
+mb.menu = tk.Menu(mb,tearoff=0)
 
 help=ttk.Button(cal,text="HELP",command=help)
 help.grid(row=0,column=1)
 
-mb["menu"] =  mb.menu
-mb.menu.add_checkbutton ( label="Sound") 
-mb.menu.add_checkbutton ( label="THEME",command=theme) 
-mb.menu.add_checkbutton ( label="sci.cal",command=sci)
+mb["menu"] =  mb.menu 
+mb.menu.add_command ( label="THEME",command=theme) 
+mb.menu.add_checkbutton ( label="SCIENTIFIC",command=sci)
 
 #( label="Change Theme",command=theme)
 
@@ -195,7 +192,7 @@ entry.focus()
 #===========BUttons===============
 
 
-button_1=ttk.Button(cal,text="1",width=5,command=lambda:press('1'))
+button_1=ttk.Button(cal,text="1",command=lambda:press('1'))
 button_1.grid(row=3,column=0,pady=20)#padx=16,pady=16)
 
 button_2=ttk.Button(cal,text="2",command=lambda:press(2))
@@ -253,7 +250,7 @@ button_c=ttk.Button(cal,text="del",command=delet)
 button_c.grid(row=8,columnspan=2,sticky=('nswe'),pady=20,padx=20)
 
 button_exit=ttk.Button(cal,text="exit",command=exit)
-button_exit.grid(row=8,column=2,columnspan=2,sticky=('nswe'),pady=20)
+button_exit.grid(row=8,column=2,columnspan=2,sticky=('nswe'),pady=20,padx=20)
 
 button_open=ttk.Button(cal,text="(",command=lambda:press("("))
 button_open.grid(row=7,column=0,pady=20,padx=20,sticky=('nswe'))
