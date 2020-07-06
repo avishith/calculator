@@ -9,7 +9,7 @@ import tkinter.messagebox as msg
 from ttkthemes import ThemedStyle
 import tkinter as tk
 import  tkinter.ttk as ttk
-import simpleaudio as s
+#import simpleaudio as s
 from math import *
 
 #____________________________________Sounds_______________________________________
@@ -24,10 +24,10 @@ result = s.WaveObject.from_wave_file("medias\\result.wav")'''
 
 #_____________________________________Help________________________________________
 
-error_statement='''A syntax error is one of several types of errors on calculators
+error_statement='''[Syntax error] : It is one of several types of errors on calculators
 representing that the equation that has been input has incorrect syntax of numbers,operations and so on.
 
-The calculation result is outside of the allowable calculation range or you are trying to perform an illegal mathematical operation (such as division by zero)'''
+[Math error] : The calculation result is outside of the allowable calculation range or you are trying to perform an illegal mathematical operation (such as division by zero)'''
 
 #_____________________________________Theme________________________________________
 
@@ -72,22 +72,44 @@ def exit():
 
 def sci():
 	global s
-	
+	global button_log
+	global button_sin
+	global button_cos
+	global button_tan
+	global button_open
+	global button_close
+	global button_equ
 	if s==1:
-		button_sin=ttk.Button(cal,text="sin",command=lambda:press('sin'))
+		button_sin=ttk.Button(cal,text="sin",command=lambda:press('sin('))
 		button_sin.grid(row=2,column=0,pady=20)
 		
-		button_cos=ttk.Button(cal,text="cos",command=lambda:press("cos"))
+		button_cos=ttk.Button(cal,text="cos",command=lambda:press("cos("))
 		button_cos.grid(row=2,column=1,pady=20)
 		
-		button_tan=ttk.Button(cal,text="tan",command=lambda:press("tan"))
+		button_tan=ttk.Button(cal,text="tan",command=lambda:press("tan("))
 		button_tan.grid(row=2,column=2,pady=20)
 		
-		button_log=ttk.Button(cal,text="log",command=lambda:press("log"))
+		button_log=ttk.Button(cal,text="log",command=lambda:press("log("))
 		button_log.grid(row=2,column=3,pady=20)
+
+		button_open=ttk.Button(cal,text="(",command=lambda:press("("))
+		button_open.grid(row=7,column=0,pady=20,padx=20,sticky=('nswe'))
+		button_close=ttk.Button(cal,text=")",command=lambda:press(")"))
+		button_close.grid(row=7,column=3,pady=20,padx=20,sticky=('nswe'))
+		button_equ=ttk.Button(cal,text="=",command=eql)
+		button_equ.grid(row=7,columnspan=2,pady=20,sticky=('nswe'))
+		cal.bind("<Return>",eql)
 		s=0
-	elif a==0:
+	elif s==0:
+		button_sin.grid_forget()
+		button_cos.grid_forget()
+		button_tan.grid_forget()
 		button_log.grid_forget()
+		button_open.grid_forget()
+		button_close.grid_forget()
+		button_equ=ttk.Button(cal,text="=",command=eql)
+		button_equ.grid(row=7,column=1,columnspan=4,pady=20,sticky=('nswe'))
+		cal.bind("<Return>",eql)
 		s=1
 
 #_____________________________________Clear________________________________________
@@ -109,17 +131,24 @@ def press(num):
 #_____________________________________Answer________________________________________
 
 def eql():
+        global exp
+        #exp=exp[::-1]
+        #if '(' in exp:
+        #        exp=exp.replace('(','*')
+        #if '*nis' not in exp:
+        #        exp=exp.replace(')','')
+        #if '*nis' in exp:
+        #        exp=exp.replace('*nis','sin(')
         try:
-            global exp
             #result.play()
             exp=str(eval(exp))
             text.set(exp)
         except ZeroDivisionError:
                 #math_error.play()
                 text.set("Math Error occured...!")
-        except SyntaxError:
+        #except SyntaxError:
                 #syn_error.play()
-                text.set("Syntax Error occured...!")
+               # text.set("Syntax Error occured...!")
         except NameError:
          	#math_error.play()
          	text.set('Syntax Error occured....!')
@@ -139,7 +168,7 @@ def delet():
 cal=tk.Tk()
 cal.title("My Python Calculator")
 cal.geometry('385x580')
-cal.iconbitmap(r'medias\\calc_icon.ico')
+#cal.iconbitmap(r'medias\\calc_icon.ico')
 cal.resizable(0,0)
 
 style = ThemedStyle(cal)
@@ -217,8 +246,10 @@ button_mul.grid(row=5,column=3,pady=20)
 button_div=ttk.Button(cal,text="/",command=lambda:press('/'))
 button_div.grid(row=6,column=3,pady=20)
 
+
+
 button_equ=ttk.Button(cal,text="=",command=eql)
-button_equ.grid(row=7,column=1,columnspan=2,pady=20,sticky=('nswe'))
+button_equ.grid(row=7,columnspan=4,pady=20,sticky=('nswe'))
 cal.bind("<Return>",eql)
 
 button_c=ttk.Button(cal,text="del",command=delet)
@@ -227,11 +258,7 @@ button_c.grid(row=8,columnspan=2,sticky=('nswe'),pady=20,padx=20)
 button_exit=ttk.Button(cal,text="exit",command=exit)
 button_exit.grid(row=8,column=2,columnspan=2,sticky=('nswe'),pady=20,padx=20)
 
-button_open=ttk.Button(cal,text="(",command=lambda:press("("))
-button_open.grid(row=7,column=0,pady=20,padx=20,sticky=('nswe'))
-	
-button_close=ttk.Button(cal,text=")",command=lambda:press(")"))
-button_close.grid(row=7,column=3,pady=20,padx=20,sticky=('nswe'))
+
 
 button_clr=ttk.Button(cal,text="C",command=clear)
 button_clr.grid(row=6,column=2,pady=20)
@@ -239,3 +266,4 @@ button_clr.grid(row=6,column=2,pady=20)
 cal.mainloop()
 
 #_____________________________________DEAD-END________________________________________
+
