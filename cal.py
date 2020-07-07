@@ -119,6 +119,15 @@ def clear():
 	#delete_sound.play()
 	exp=""
 	text.set(exp)
+
+def aboutus():
+	about=tk.Tk()
+	about.title("ABOUT US")
+	ttk.Button(about, text = "", image = "IMG.jpg").pack()
+	about.geometry('200x200')
+#cal.iconbitmap(r'medias\\calc_icon.ico')
+	cal.resizable(0,0)
+	about.mainloop()
 	
 #______________________________________Press________________________________________
 	
@@ -186,6 +195,9 @@ mb.menu = tk.Menu(mb,tearoff=0)
 
 help=ttk.Button(cal,text="HELP",command=help)
 help.grid(row=0,column=1)
+
+about=ttk.Button(cal,text="About Us",command=aboutus)
+about.grid(row=0,column=2)
 
 mb["menu"] =  mb.menu 
 mb.menu.add_command ( label="THEME",)#command=theme) 
