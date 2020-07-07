@@ -6,7 +6,7 @@ import os
 os.system('pip install -r req.txt')
 #_______________________________Importing Modules_________________________________
 import tkinter.messagebox as msg
-from ttkthemes import ThemedStyle
+#from ttkthemes import ThemedStyle
 import tkinter as tk
 import  tkinter.ttk as ttk
 #import simpleaudio as s
@@ -30,8 +30,7 @@ representing that the equation that has been input has incorrect syntax of numbe
 [Math error] : The calculation result is outside of the allowable calculation range or you are trying to perform an illegal mathematical operation (such as division by zero)'''
 
 #_____________________________________Theme________________________________________
-
-def theme():
+'''def theme():
 	global a
 	if a==0:
 		style = ThemedStyle(cal)
@@ -50,9 +49,9 @@ def theme():
 	elif a==3:	
 		style = ThemedStyle(cal)
 		style.set_theme("alt")
-		a=0
+		a=0'''
 		
-	'''These are themes m=["classic","black","alt","winxpblue",'plastik',"breeze"]
+'''These are themes m=["classic","black","alt","winxpblue",'plastik',"breeze"]
 	m= m[random.randint(0,5)]'''
 	
 #_____________________________________Help________________________________________
@@ -80,6 +79,7 @@ def sci():
 	global button_close
 	global button_equ
 	if s==1:
+		button_equ.grid_forget()
 		button_sin=ttk.Button(cal,text="sin",command=lambda:press('sin('))
 		button_sin.grid(row=2,column=0,pady=20)
 		
@@ -97,7 +97,7 @@ def sci():
 		button_close=ttk.Button(cal,text=")",command=lambda:press(")"))
 		button_close.grid(row=7,column=3,pady=20,padx=20,sticky=('nswe'))
 		button_equ=ttk.Button(cal,text="=",command=eql)
-		button_equ.grid(row=7,columnspan=2,pady=20,sticky=('nswe'))
+		button_equ.grid(row=7,column=1,columnspan=2,pady=20,sticky=('nswe'))
 		cal.bind("<Return>",eql)
 		s=0
 	elif s==0:
@@ -108,7 +108,7 @@ def sci():
 		button_open.grid_forget()
 		button_close.grid_forget()
 		button_equ=ttk.Button(cal,text="=",command=eql)
-		button_equ.grid(row=7,column=1,columnspan=4,pady=20,sticky=('nswe'))
+		button_equ.grid(row=7,columnspan=4,pady=20,sticky=('nswe'))
 		cal.bind("<Return>",eql)
 		s=1
 
@@ -171,8 +171,8 @@ cal.geometry('385x580')
 #cal.iconbitmap(r'medias\\calc_icon.ico')
 cal.resizable(0,0)
 
-style = ThemedStyle(cal)
-style.set_theme("alt")
+#style = ThemedStyle(cal)
+#style.set_theme("alt")
 a=0#variable for theme
 s=1
 exp=""
@@ -188,7 +188,7 @@ help=ttk.Button(cal,text="HELP",command=help)
 help.grid(row=0,column=1)
 
 mb["menu"] =  mb.menu 
-mb.menu.add_command ( label="THEME",command=theme) 
+mb.menu.add_command ( label="THEME",)#command=theme) 
 mb.menu.add_checkbutton ( label="SCIENTIFIC",command=sci)
 
 #_____________________________________Entry________________________________________
