@@ -6,31 +6,39 @@ import os
 os.system('pip install -r req.txt')
 #_______________________________Importing Modules_________________________________
 import tkinter.messagebox as msg
-#from ttkthemes import ThemedStyle
+from ttkthemes import ThemedStyle
 import tkinter as tk
 import  tkinter.ttk as ttk
-#import simpleaudio as s
+import simpleaudio as s
 from math import *
+
 
 #____________________________________Sounds_______________________________________
 
-'''welcome = s.WaveObject.from_wave_file("medias\\welcome.wav")
+welcome = s.WaveObject.from_wave_file("medias\\welcome.wav")
 button_sound = s.WaveObject.from_wave_file("medias\\buttons.wav")
 math_error = s.WaveObject.from_wave_file("medias\\matherror.wav")
 syn_error = s.WaveObject.from_wave_file("medias\\syntax_error.wav")
 delete_sound = s.WaveObject.from_wave_file("medias\\delete.wav")
 thanks = s.WaveObject.from_wave_file("medias\\thanks.wav")
-result = s.WaveObject.from_wave_file("medias\\result.wav")'''
+result = s.WaveObject.from_wave_file("medias\\result.wav")
+great = s.WaveObject.from_wave_file("medias\\great.wav")
 
 #_____________________________________Help________________________________________
 
 error_statement='''[Syntax error] : It is one of several types of errors on calculators
 representing that the equation that has been input has incorrect syntax of numbers,operations and so on.
 
-[Math error] : The calculation result is outside of the allowable calculation range or you are trying to perform an illegal mathematical operation (such as division by zero)'''
+[Math error] : The calculation result is outside of the allowable calculation range or you are trying to perform an illegal mathematical operation (such as division by zero)
+
+[Instructions] : Use braces for each scientific calculations.You can't perform the oprations like '10sin(60)' use '10*sin(60)'.
+
+Thanks :
+                Avishith & Harikrishnan
+'''
 
 #_____________________________________Theme________________________________________
-'''def theme():
+def theme():
 	global a
 	if a==0:
 		style = ThemedStyle(cal)
@@ -44,15 +52,9 @@ representing that the equation that has been input has incorrect syntax of numbe
 		
 	elif a==2:	
 		style = ThemedStyle(cal)
-		style.set_theme("blue")
-		a=3
-	elif a==3:	
-		style = ThemedStyle(cal)
 		style.set_theme("alt")
-		a=0'''
-		
-'''These are themes m=["classic","black","alt","winxpblue",'plastik',"breeze"]
-	m= m[random.randint(0,5)]'''
+		a=0
+
 	
 #_____________________________________Help________________________________________
 
@@ -62,11 +64,14 @@ def help():
 #_____________________________________Exit________________________________________
 
 def exit():
-    #thanks.play()
-    MsgBox = msg.askquestion ('Exit Application','Are you sure you want to exit the application')
-    if MsgBox == 'yes':
-       cal.destroy()
-    print('Thanks For Using Our Calculator...!')
+        MsgBox = msg.askquestion ('Exit Application','Are you sure you want to exit the application')
+        if MsgBox == 'yes':
+                thanks.play()
+                cal.destroy()
+                print('Thanks For Using Our Calculator...!')
+        elif MsgBox == 'no':
+                great.play()
+                print('Great Choice...!')
 #__________________________________Scientific_____________________________________
 
 def sci():
@@ -78,6 +83,7 @@ def sci():
 	global button_open
 	global button_close
 	global button_equ
+	global exp
 	if s==1:
 		button_equ.grid_forget()
 		button_sin=ttk.Button(cal,text="sin",command=lambda:press('sin('))
@@ -99,6 +105,8 @@ def sci():
 		button_equ=ttk.Button(cal,text="=",command=eql)
 		button_equ.grid(row=7,column=1,columnspan=2,pady=20,sticky=('nswe'))
 		cal.bind("<Return>",eql)
+		exp=''
+		text.set(exp)
 		s=0
 	elif s==0:
 		button_sin.grid_forget()
@@ -108,24 +116,26 @@ def sci():
 		button_open.grid_forget()
 		button_close.grid_forget()
 		button_equ=ttk.Button(cal,text="=",command=eql)
-		button_equ.grid(row=7,columnspan=4,pady=20,sticky=('nswe'))
+		button_equ.grid(row=7,columnspan=4,pady=20,padx=30,sticky=('nswe'))
 		cal.bind("<Return>",eql)
+		exp=''
+		text.set(exp)
 		s=1
 
 #_____________________________________Clear________________________________________
 
 def clear():
 	global exp
-	#delete_sound.play()
+	delete_sound.play()
 	exp=""
 	text.set(exp)
-
+#_____________________________________About________________________________________
 def aboutus():
 	about=tk.Tk()
 	about.title("ABOUT US")
-	ttk.Button(about, text = "", image = "IMG.jpg").pack()
+	#Ivade Button Set Cheyyanam Then Our profile aayi connect aakkanam...(^_^) 
 	about.geometry('200x200')
-#cal.iconbitmap(r'medias\\calc_icon.ico')
+	cal.iconbitmap(r'medias\\calc_icon.ico')
 	cal.resizable(0,0)
 	about.mainloop()
 	
@@ -133,7 +143,7 @@ def aboutus():
 	
 def press(num):
 	global exp
-	#button_sound.play()
+	button_sound.play()
 	exp += str(num)
 	text.set(exp)
 	
@@ -141,47 +151,40 @@ def press(num):
 
 def eql():
         global exp
-        #exp=exp[::-1]
-        #if '(' in exp:
-        #        exp=exp.replace('(','*')
-        #if '*nis' not in exp:
-        #        exp=exp.replace(')','')
-        #if '*nis' in exp:
-        #        exp=exp.replace('*nis','sin(')
         try:
-            #result.play()
             exp=str(eval(exp))
             text.set(exp)
+            result.play()
         except ZeroDivisionError:
-                #math_error.play()
+                math_error.play()
                 text.set("Math Error occured...!")
-        #except SyntaxError:
-                #syn_error.play()
-               # text.set("Syntax Error occured...!")
+        except SyntaxError:
+                syn_error.play()
+                text.set("Syntax Error occured...!")
         except NameError:
-         	#math_error.play()
-         	text.set('Syntax Error occured....!')
+                math_error.play()
+                text.set('Syntax Error occured....!')
 
 #___________________________________Backspace_______________________________________
 
 def delet():
 	global exp
-	#delete_sound.play()
+	delete_sound.play()
 	le=len(exp)
 	exp=exp[0:(le-1)]
 	text.set(exp)
 
 #_____________________________________Main________________________________________
 
-#welcome.play()
+welcome.play()
 cal=tk.Tk()
 cal.title("My Python Calculator")
-cal.geometry('385x580')
-#cal.iconbitmap(r'medias\\calc_icon.ico')
+cal.geometry('400x630')
+cal.iconbitmap(r'medias\\calc_icon.ico')
 cal.resizable(0,0)
 
-#style = ThemedStyle(cal)
-#style.set_theme("alt")
+style = ThemedStyle(cal)
+style.set_theme("alt")
 a=0#variable for theme
 s=1
 exp=""
@@ -200,13 +203,13 @@ about=ttk.Button(cal,text="About Us",command=aboutus)
 about.grid(row=0,column=2)
 
 mb["menu"] =  mb.menu 
-mb.menu.add_command ( label="THEME",)#command=theme) 
+mb.menu.add_command ( label="THEME",command=theme) 
 mb.menu.add_checkbutton ( label="SCIENTIFIC",command=sci)
 
 #_____________________________________Entry________________________________________
 
 entry=tk.Entry(cal,justify="right",font=("aril",20,'bold'),textvariable=text,bd=30,insertwidth=4,bg='gray')
-entry.grid(row=1,columnspan=4,sticky=('nsew'))
+entry.grid(row=1,columnspan=4,padx=20,pady=20,sticky=('nsew'))
 entry.focus()
 
 #_____________________________________Keypad________________________________________
@@ -261,18 +264,18 @@ button_div.grid(row=6,column=3,pady=20)
 
 
 button_equ=ttk.Button(cal,text="=",command=eql)
-button_equ.grid(row=7,columnspan=4,pady=20,sticky=('nswe'))
+button_equ.grid(row=7,columnspan=4,pady=20,padx=30,sticky=('nswe'))
 cal.bind("<Return>",eql)
 
-button_c=ttk.Button(cal,text="del",command=delet)
-button_c.grid(row=8,columnspan=2,sticky=('nswe'),pady=20,padx=20)
+button_c=ttk.Button(cal,text="CLEAR",command=clear)
+button_c.grid(row=8,columnspan=2,sticky=('nswe'),padx=20,pady=20)
 
-button_exit=ttk.Button(cal,text="exit",command=exit)
+button_exit=ttk.Button(cal,text="EXIT",command=exit)
 button_exit.grid(row=8,column=2,columnspan=2,sticky=('nswe'),pady=20,padx=20)
 
 
 
-button_clr=ttk.Button(cal,text="C",command=clear)
+button_clr=ttk.Button(cal,text="BACK",command=delet)
 button_clr.grid(row=6,column=2,pady=20)
 
 cal.mainloop()
