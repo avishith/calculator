@@ -11,7 +11,7 @@ import tkinter as tk
 import  tkinter.ttk as ttk
 import simpleaudio as s
 from math import *
-
+import webbrowser
 
 #____________________________________Sounds_______________________________________
 
@@ -23,6 +23,10 @@ delete_sound = s.WaveObject.from_wave_file("medias\\delete.wav")
 thanks = s.WaveObject.from_wave_file("medias\\thanks.wav")
 result = s.WaveObject.from_wave_file("medias\\result.wav")
 great = s.WaveObject.from_wave_file("medias\\great.wav")
+
+#____________________________________Profiles_____________________________________
+
+url = "https://im-your-hari.github.io/profile/"
 
 #_____________________________________Help________________________________________
 
@@ -131,13 +135,7 @@ def clear():
 	text.set(exp)
 #_____________________________________About________________________________________
 def aboutus():
-	about=tk.Tk()
-	about.title("ABOUT US")
-	#Ivade Button Set Cheyyanam Then Our profile aayi connect aakkanam...(^_^) 
-	about.geometry('200x200')
-	cal.iconbitmap(r'medias\\calc_icon.ico')
-	cal.resizable(0,0)
-	about.mainloop()
+        webbrowser.open(url)
 	
 #______________________________________Press________________________________________
 	
@@ -199,7 +197,7 @@ mb.menu = tk.Menu(mb,tearoff=0)
 help=ttk.Button(cal,text="HELP",command=help)
 help.grid(row=0,column=1)
 
-about=ttk.Button(cal,text="About Us",command=aboutus)
+about=ttk.Button(cal,text="ABOUT",command=aboutus)
 about.grid(row=0,column=2)
 
 mb["menu"] =  mb.menu 
