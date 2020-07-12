@@ -1,21 +1,29 @@
 #_______________________________________________________________MyPythonCalculator_______________________________________________________________
 
 
+
+
 #_______________________________Downloading Modules_______________________________
+
+
 import os
 os.system('pip install -r req.txt')
+
+
 #_______________________________Importing Modules_________________________________
+
 import tkinter.messagebox as msg
 from ttkthemes import ThemedStyle
 import tkinter as tk
 import  tkinter.ttk as ttk
-import simpleaudio as s
+#import simpleaudio as s
 from math import *
 import webbrowser
 
 #____________________________________Sounds_______________________________________
 
-welcome = s.WaveObject.from_wave_file("medias\\welcome.wav")
+
+'''welcome = s.WaveObject.from_wave_file("medias\\welcome.wav")
 button_sound = s.WaveObject.from_wave_file("medias\\buttons.wav")
 math_error = s.WaveObject.from_wave_file("medias\\matherror.wav")
 syn_error = s.WaveObject.from_wave_file("medias\\syntax_error.wav")
@@ -24,14 +32,16 @@ thanks = s.WaveObject.from_wave_file("medias\\thanks.wav")
 result = s.WaveObject.from_wave_file("medias\\result.wav")
 great = s.WaveObject.from_wave_file("medias\\great.wav")
 
+'''
 #____________________________________Profiles_____________________________________
 
 url = "https://im-your-hari.github.io/profile/"
 
+
 #_____________________________________Help________________________________________
 
-error_statement='''[Syntax error] : It is one of several types of errors on calculators
-representing that the equation that has been input has incorrect syntax of numbers,operations and so on.
+
+error_statement='''[Syntax error] : It is one of several types of errors on calculators representing that the equation that has been input has incorrect syntax of numbers,operations and so on.
 
 [Math error] : The calculation result is outside of the allowable calculation range or you are trying to perform an illegal mathematical operation (such as division by zero)
 
@@ -41,23 +51,30 @@ Thanks :
                 Avishith & Harikrishnan
 '''
 
+
 #_____________________________________Theme________________________________________
+
+
 def theme():
 	global a
+	global cal
 	if a==0:
 		style = ThemedStyle(cal)
 		style.set_theme('black')
 		a=1
+		cal.config(bg='#ff0066')
 	
 	elif a==1:	
 		style = ThemedStyle(cal)
 		style.set_theme("plastik")
 		a=2
+		cal.config(bg='#ffb366')
 		
 	elif a==2:	
 		style = ThemedStyle(cal)
 		style.set_theme("alt")
 		a=0
+		cal.config(bg='#1affa3')
 
 	
 #_____________________________________Help________________________________________
@@ -65,17 +82,19 @@ def theme():
 def help():
 	msg.showinfo( 'Help',error_statement)
 	
+	
 #_____________________________________Exit________________________________________
 
 def exit():
         MsgBox = msg.askquestion ('Exit Application','Are you sure you want to exit the application')
         if MsgBox == 'yes':
-                thanks.play()
+               #} thanks.play()
                 cal.destroy()
                 print('Thanks For Using Our Calculator...!')
         elif MsgBox == 'no':
-                great.play()
+                #great.play()
                 print('Great Choice...!')
+
 #__________________________________Scientific_____________________________________
 
 def sci():
@@ -130,29 +149,48 @@ def sci():
 
 def clear():
 	global exp
-	delete_sound.play()
+	exp=entry.get()
+	#delete_sound.play()
 	exp=""
 	text.set(exp)
+	
 #_____________________________________About________________________________________
 def aboutus():
         webbrowser.open(url)
+        
 	
+
+
 #______________________________________Press________________________________________
 	
 def press(num):
 	global exp
-	button_sound.play()
+	exp=entry.get()
+	#button_sound.play()
 	exp += str(num)
 	text.set(exp)
+	#entry.focus()
+	
+#-------------------
+
+
+'''def one(event):
+        global exp
+        button_sound.play()
+        exp += str(event.char)
+        entry.focus()'''
+        
+
+        
 	
 #_____________________________________Answer________________________________________
-
-def eql():
+def eql(*args):
         global exp
+        exp=entry.get()
         try:
             exp=str(eval(exp))
             text.set(exp)
-            result.play()
+           # result.play()
         except ZeroDivisionError:
                 math_error.play()
                 text.set("Math Error occured...!")
@@ -167,24 +205,26 @@ def eql():
 
 def delet():
 	global exp
-	delete_sound.play()
+	exp=entry.get()
+#	delete_sound.play()
 	le=len(exp)
 	exp=exp[0:(le-1)]
 	text.set(exp)
 
-#_____________________________________Main________________________________________
+#_____________________________________Main_______________________________________
 
-welcome.play()
+#welcome.play()
 cal=tk.Tk()
 cal.title("My Python Calculator")
+cal.config(bg='#1affa3')
 cal.geometry('400x630')
-cal.iconbitmap(r'medias\\calc_icon.ico')
+#cal.iconbitmap(r'medias\\calc_icon.ico')
 cal.resizable(0,0)
 
 style = ThemedStyle(cal)
 style.set_theme("alt")
 a=0#variable for theme
-s=1
+s=1#variable for scientific_mode
 exp=""
 text=tk.StringVar()
 
@@ -212,17 +252,20 @@ entry.focus()
 
 #_____________________________________Keypad________________________________________
 
+
 button_1=ttk.Button(cal,text="1",command=lambda:press('1'))
-button_1.grid(row=3,column=0,pady=20)#padx=16,pady=16)
+button_1.grid(row=3,column=0,pady=20)
+#entry.bind("<Key>",one)
 
 button_2=ttk.Button(cal,text="2",command=lambda:press(2))
 button_2.grid(row=3,column=1,pady=20)
+#entry.bind("<Key>",one)
 
 button_3=ttk.Button(cal,text="3",command=lambda:press(3))
-button_3.grid(row=3,column=2,pady=20)#,padx=16)
+button_3.grid(row=3,column=2,pady=20)
 
 button_4=ttk.Button(cal,text="4",command=lambda:press('4'))
-button_4.grid(row=4,column=0,pady=20)#,padx=10,pady=10)
+button_4.grid(row=4,column=0,pady=20)
 
 button_5=ttk.Button(cal,text="5",command=lambda:press('5'))
 button_5.grid(row=4,column=1,pady=20)
@@ -265,6 +308,7 @@ button_equ=ttk.Button(cal,text="=",command=eql)
 button_equ.grid(row=7,columnspan=4,pady=20,padx=30,sticky=('nswe'))
 cal.bind("<Return>",eql)
 
+
 button_c=ttk.Button(cal,text="CLEAR",command=clear)
 button_c.grid(row=8,columnspan=2,sticky=('nswe'),padx=20,pady=20)
 
@@ -273,10 +317,10 @@ button_exit.grid(row=8,column=2,columnspan=2,sticky=('nswe'),pady=20,padx=20)
 
 
 
-button_clr=ttk.Button(cal,text="BACK",command=delet)
+button_clr=ttk.Button(cal,text="⌫",command=delet)
 button_clr.grid(row=6,column=2,pady=20)
+entry.bind('<BackSpace>')
 
 cal.mainloop()
 
 #_____________________________________DEAD-END________________________________________
-
