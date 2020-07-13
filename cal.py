@@ -16,14 +16,14 @@ import tkinter.messagebox as msg
 from ttkthemes import ThemedStyle
 import tkinter as tk
 import  tkinter.ttk as ttk
-#import simpleaudio as s
+import simpleaudio as s
 from math import *
 import webbrowser
 
 #____________________________________Sounds_______________________________________
 
 
-'''welcome = s.WaveObject.from_wave_file("medias\\welcome.wav")
+welcome = s.WaveObject.from_wave_file("medias\\welcome.wav")
 button_sound = s.WaveObject.from_wave_file("medias\\buttons.wav")
 math_error = s.WaveObject.from_wave_file("medias\\matherror.wav")
 syn_error = s.WaveObject.from_wave_file("medias\\syntax_error.wav")
@@ -32,7 +32,7 @@ thanks = s.WaveObject.from_wave_file("medias\\thanks.wav")
 result = s.WaveObject.from_wave_file("medias\\result.wav")
 great = s.WaveObject.from_wave_file("medias\\great.wav")
 
-'''
+
 #____________________________________Profiles_____________________________________
 
 url = "https://im-your-hari.github.io/profile/"
@@ -199,7 +199,11 @@ def eql(*args):
                 text.set("Syntax Error occured...!")
         except NameError:
                 math_error.play()
-                text.set('Syntax Error occured....!')
+                text.set('Math Error occured....!')
+        except TypeError:
+                syn_error.play()
+                text.set("Syntax Error occured...!")
+                
 
 #___________________________________Backspace_______________________________________
 
