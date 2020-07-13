@@ -16,14 +16,14 @@ import tkinter.messagebox as msg
 from ttkthemes import ThemedStyle
 import tkinter as tk
 import  tkinter.ttk as ttk
-import simpleaudio as s
+#import simpleaudio as s
 from math import *
 import webbrowser
 
 #____________________________________Sounds_______________________________________
 
 
-welcome = s.WaveObject.from_wave_file("medias\\welcome.wav")
+'''welcome = s.WaveObject.from_wave_file("medias\\welcome.wav")
 button_sound = s.WaveObject.from_wave_file("medias\\buttons.wav")
 math_error = s.WaveObject.from_wave_file("medias\\matherror.wav")
 syn_error = s.WaveObject.from_wave_file("medias\\syntax_error.wav")
@@ -32,7 +32,7 @@ thanks = s.WaveObject.from_wave_file("medias\\thanks.wav")
 result = s.WaveObject.from_wave_file("medias\\result.wav")
 great = s.WaveObject.from_wave_file("medias\\great.wav")
 
-
+'''
 #____________________________________Profiles_____________________________________
 
 url = "https://im-your-hari.github.io/profile/"
@@ -48,7 +48,7 @@ error_statement='''[Syntax error] : It is one of several types of errors on calc
 [Instructions] : Use braces for each scientific calculations.You can't perform the oprations like '10sin(60)' use '10*sin(60)'.
 
 Thanks :
-                Avishith & Harikrishnan
+                Avishith PM & Harikrishnan 
 '''
 
 
@@ -57,24 +57,40 @@ Thanks :
 
 def theme():
 	global a
+	global Tcolor
+	global entry
 	global cal
 	if a==0:
-		style = ThemedStyle(cal)
-		style.set_theme('black')
-		a=1
-		cal.config(bg='#ff0066')
-	
-	elif a==1:	
+		Tcolor='gray'
+		entry=tk.Entry(cal,justify="right",font=("aril",20,'bold'),textvariable=text,bd=30,insertwidth=4,bg=Tcolor)
 		style = ThemedStyle(cal)
 		style.set_theme("plastik")
-		a=2
-		cal.config(bg='#ffb366')
+		a=1
+		cal.config(bg='black')
 		
-	elif a==2:	
+	
+	elif a==1:
+		Tcolor='#1affa6'
 		style = ThemedStyle(cal)
 		style.set_theme("alt")
+		a=2
+		cal.config(bg='#1affa3')	
+		
+	elif a==2:
+		Tcolor='gray'
+		style = ThemedStyle(cal)
+		style.set_theme('black')
+		a=3
+		cal.config(bg='#ff0066')
+		
+		
+	elif a==3:
+		Tcolor='#734d26'
+		style = ThemedStyle(cal)
+		style.set_theme("black")
 		a=0
-		cal.config(bg='#1affa3')
+		cal.config(bg='#996633')
+		
 
 	
 #_____________________________________Help________________________________________
@@ -173,12 +189,12 @@ def press(num):
 	
 #-------------------
 
-
-'''def one(event):
+def one(event):
         global exp
-        button_sound.play()
-        exp += str(event.char)
-        entry.focus()'''
+        exp=entry.get()
+        #button_sound.play()
+        exp += str(event.keysym)
+        entry.focus()
         
 
         
@@ -192,18 +208,14 @@ def eql(*args):
             text.set(exp)
            # result.play()
         except ZeroDivisionError:
-                math_error.play()
+             #   math_error.play()
                 text.set("Math Error occured...!")
         except SyntaxError:
-                syn_error.play()
+              #  syn_error.play()
                 text.set("Syntax Error occured...!")
         except NameError:
-                math_error.play()
-                text.set('Math Error occured....!')
-        except TypeError:
-                syn_error.play()
-                text.set("Syntax Error occured...!")
-                
+           #     math_error.play()
+                text.set('Syntax Error occured....!')
 
 #___________________________________Backspace_______________________________________
 
@@ -220,17 +232,24 @@ def delet():
 #welcome.play()
 cal=tk.Tk()
 cal.title("My Python Calculator")
-cal.config(bg='#1affa3')
+cal.config(bg='#996633')
 cal.geometry('400x630')
 #cal.iconbitmap(r'medias\\calc_icon.ico')
 cal.resizable(0,0)
-
+Tcolor='#734d26'
 style = ThemedStyle(cal)
-style.set_theme("alt")
+style.set_theme("black")
+
 a=0#variable for theme
 s=1#variable for scientific_mode
 exp=""
 text=tk.StringVar()
+
+#_____________________________________Entry________________________________________
+
+entry=tk.Entry(cal,justify="right",font=("aril",20,'bold'),textvariable=text,bd=30,insertwidth=4,bg=Tcolor)
+entry.grid(row=1,columnspan=4,padx=20,pady=20,sticky=('nsew'))
+entry.focus()
 
 #_____________________________________Nav-Bar________________________________________
 
@@ -248,22 +267,17 @@ mb["menu"] =  mb.menu
 mb.menu.add_command ( label="THEME",command=theme) 
 mb.menu.add_checkbutton ( label="SCIENTIFIC",command=sci)
 
-#_____________________________________Entry________________________________________
 
-entry=tk.Entry(cal,justify="right",font=("aril",20,'bold'),textvariable=text,bd=30,insertwidth=4,bg='gray')
-entry.grid(row=1,columnspan=4,padx=20,pady=20,sticky=('nsew'))
-entry.focus()
 
 #_____________________________________Keypad________________________________________
 
 
 button_1=ttk.Button(cal,text="1",command=lambda:press('1'))
 button_1.grid(row=3,column=0,pady=20)
-#entry.bind("<Key>",one)
+entry.bind("<Key>",one)
 
 button_2=ttk.Button(cal,text="2",command=lambda:press(2))
 button_2.grid(row=3,column=1,pady=20)
-#entry.bind("<Key>",one)
 
 button_3=ttk.Button(cal,text="3",command=lambda:press(3))
 button_3.grid(row=3,column=2,pady=20)
@@ -324,6 +338,11 @@ button_exit.grid(row=8,column=2,columnspan=2,sticky=('nswe'),pady=20,padx=20)
 button_clr=ttk.Button(cal,text="⌫",command=delet)
 button_clr.grid(row=6,column=2,pady=20)
 entry.bind('<BackSpace>')
+#entry.bind('9')
+entry.bind('+')
+#entry.bind("<Shift-+>")
+entry.bind('*')
+cal.bind('<Control-Q>')
 
 cal.mainloop()
 
