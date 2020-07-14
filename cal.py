@@ -1,4 +1,6 @@
-#_______________________________________________________________MyPythonCalculator_______________________________________________________________
+#NB :-You need ttkthemes and simpleaudio for running this calculator smoothly(we provided it as auto install)
+
+#_______________________________________________________________Pycalc_______________________________________________________________
 
 
 
@@ -22,8 +24,7 @@ import webbrowser
 
 #____________________________________Sounds_______________________________________
 
-
-'''welcome = s.WaveObject.from_wave_file("medias\\welcome.wav")
+welcome = s.WaveObject.from_wave_file("medias\\welcome.wav")
 button_sound = s.WaveObject.from_wave_file("medias\\buttons.wav")
 math_error = s.WaveObject.from_wave_file("medias\\matherror.wav")
 syn_error = s.WaveObject.from_wave_file("medias\\syntax_error.wav")
@@ -32,7 +33,7 @@ thanks = s.WaveObject.from_wave_file("medias\\thanks.wav")
 result = s.WaveObject.from_wave_file("medias\\result.wav")
 great = s.WaveObject.from_wave_file("medias\\great.wav")
 
-'''
+
 #____________________________________Profiles_____________________________________
 
 url = "https://im-your-hari.github.io/profile/"
@@ -63,6 +64,8 @@ def theme():
 	if a==0:
 		Tcolor='gray'
 		entry=tk.Entry(cal,justify="right",font=("aril",20,'bold'),textvariable=text,bd=30,insertwidth=4,bg=Tcolor)
+		entry.grid(row=1,columnspan=4,		padx=20,pady=20,sticky=('nsew'))
+		entry.focus()
 		style = ThemedStyle(cal)
 		style.set_theme("plastik")
 		a=1
@@ -70,22 +73,31 @@ def theme():
 		
 	
 	elif a==1:
-		Tcolor='#1affa6'
+		Tcolor='#d6d6c2'
+		entry=tk.Entry(cal,justify="right",font=("aril",20,'bold'),textvariable=text,bd=30,insertwidth=4,bg=Tcolor)
+		entry.grid(row=1,columnspan=4,		padx=20,pady=20,sticky=('nsew'))
+		entry.focus()
 		style = ThemedStyle(cal)
 		style.set_theme("alt")
 		a=2
 		cal.config(bg='#1affa3')	
 		
 	elif a==2:
-		Tcolor='gray'
+		Tcolor='#d1e0e0'
+		entry=tk.Entry(cal,justify="right",font=("aril",20,'bold'),textvariable=text,bd=30,insertwidth=4,bg=Tcolor)
+		entry.grid(row=1,columnspan=4,		padx=20,pady=20,sticky=('nsew'))
+		entry.focus()
 		style = ThemedStyle(cal)
-		style.set_theme('black')
+		style.set_theme('plastik')
 		a=3
-		cal.config(bg='#ff0066')
+		cal.config(bg='#336699')
 		
 		
 	elif a==3:
 		Tcolor='#734d26'
+		entry=tk.Entry(cal,justify="right",font=("aril",20,'bold'),textvariable=text,bd=30,insertwidth=4,bg=Tcolor)
+		entry.grid(row=1,columnspan=4,		padx=20,pady=20,sticky=('nsew'))
+		entry.focus()
 		style = ThemedStyle(cal)
 		style.set_theme("black")
 		a=0
