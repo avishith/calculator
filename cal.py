@@ -8,19 +8,16 @@
 #_______________________________Downloading Modules_______________________________
 
 
-import os
-os.system('pip install -r req.txt')
-
-
 #_______________________________Importing Modules_________________________________
 
 import tkinter.messagebox as msg
 from ttkthemes import ThemedStyle
 import tkinter as tk
 import  tkinter.ttk as ttk
-#import simpleaudio as s
+import simpleaudio as s
 from math import *
 import webbrowser
+
 
 #____________________________________Sounds_______________________________________
 
@@ -116,11 +113,11 @@ def help():
 def exit():
         MsgBox = msg.askquestion ('Exit Application','Are you sure you want to exit the application')
         if MsgBox == 'yes':
-               #} thanks.play()
+                thanks.play()
                 cal.destroy()
                 print('Thanks For Using Our Calculator...!')
         elif MsgBox == 'no':
-                #great.play()
+                great.play()
                 print('Great Choice...!')
 
 #__________________________________Scientific_____________________________________
@@ -178,7 +175,7 @@ def sci():
 def clear():
 	global exp
 	exp=entry.get()
-	#delete_sound.play()
+	delete_sound.play()
 	exp=""
 	text.set(exp)
 	
@@ -194,17 +191,17 @@ def aboutus():
 def press(num):
 	global exp
 	exp=entry.get()
-	#button_sound.play()
+	button_sound.play()
 	exp += str(num)
 	text.set(exp)
-	#entry.focus()
+	entry.focus()
 	
 #-------------------
 
 def one(event):
         global exp
         exp=entry.get()
-        #button_sound.play()
+        button_sound.play()
         exp += str(event.keysym)
         entry.focus()
         
@@ -218,15 +215,15 @@ def eql(*args):
         try:
             exp=str(eval(exp))
             text.set(exp)
-           # result.play()
+            result.play()
         except ZeroDivisionError:
-             #   math_error.play()
+                math_error.play()
                 text.set("Math Error occured...!")
         except SyntaxError:
-              #  syn_error.play()
+                syn_error.play()
                 text.set("Syntax Error occured...!")
         except NameError:
-           #     math_error.play()
+                math_error.play()
                 text.set('Syntax Error occured....!')
 
 #___________________________________Backspace_______________________________________
@@ -234,19 +231,19 @@ def eql(*args):
 def delet():
 	global exp
 	exp=entry.get()
-#	delete_sound.play()
+	delete_sound.play()
 	le=len(exp)
 	exp=exp[0:(le-1)]
 	text.set(exp)
 
 #_____________________________________Main_______________________________________
 
-#welcome.play()
+welcome.play()
 cal=tk.Tk()
 cal.title("My Python Calculator")
 cal.config(bg='#996633')
 cal.geometry('400x630')
-#cal.iconbitmap(r'medias\\calc_icon.ico')
+cal.iconbitmap(r'medias\\calc_icon.ico')
 cal.resizable(0,0)
 Tcolor='#734d26'
 style = ThemedStyle(cal)
